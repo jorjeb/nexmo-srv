@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package proto.sms;
+
+service SMS {
+	rpc Send(SendRequest) returns (SendResponse) {}
+}
+
+message SendRequest {
+	string from = 1;
+	string to = 2; // E.164 format
+	string text = 3;
+	string regionCode = 4;
+}
+
+message MessagePart {
+	string status = 1;
+	string messageId = 2;
+	string to = 3;
+	string clientRef = 4;
+	string remainingBalance = 5;
+	string messagePrice = 6;
+	string network = 7;
+	string errorText = 8;
+}
+
+message SendResponse {
+	string messageCount = 1;
+	repeated MessagePart messages = 2;
+}
